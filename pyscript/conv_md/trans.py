@@ -118,6 +118,22 @@ def convert_latex_parentheses_to_dollar(content: str) -> str:
     return content
 
 
+def remove_space_before_punctuation(content: str) -> str:
+    """구두점 앞의 불필요한 공백을 제거합니다.
+
+    문자 다음에 오는 공백 + 마침표 또는 콜론을
+    문자 + 마침표/콜론으로 변환합니다.
+    (예: "example ." -> "example.", "text :" -> "text:")
+
+    Args:
+        content: 변환할 원본 텍스트.
+
+    Returns:
+        str: 구두점 앞의 공백이 제거된 텍스트.
+    """
+    return re.sub(r"(\S)\s+([.:])", r"\1\2", content)
+
+
 def convert_asterisk_to_dash(content: str) -> str:
     """마크다운 리스트 형식을 별표에서 대시로 변환합니다.
 

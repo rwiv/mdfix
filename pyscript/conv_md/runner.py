@@ -8,6 +8,7 @@ from .trans import (
     normalize_header_levels,
     convert_latex_brackets_to_double_dollar,
     convert_latex_parentheses_to_dollar,
+    remove_space_before_punctuation,
     convert_asterisk_to_dash,
     reduce_numbered_list_spaces,
 )
@@ -46,6 +47,7 @@ def apply_transformations(content: str, mode: str = "default") -> str:
             normalize_header_levels,
             convert_latex_brackets_to_double_dollar,
             convert_latex_parentheses_to_dollar,
+            remove_space_before_punctuation,
         ],
         "remove_refs_gemini": [
             remove_numbered_lines,
@@ -54,6 +56,7 @@ def apply_transformations(content: str, mode: str = "default") -> str:
             normalize_header_levels,
             convert_latex_brackets_to_double_dollar,
             convert_latex_parentheses_to_dollar,
+            remove_space_before_punctuation,
             convert_asterisk_to_dash,
             reduce_numbered_list_spaces,
         ],
