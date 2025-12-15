@@ -1,10 +1,8 @@
-import pytest
 import sys
 import os
-from pathlib import Path
 from unittest.mock import patch
 
-from pyscript.conv_md import (
+from pyscript.conv_md.runner import (
     get_paths,
     conv_md,
 )
