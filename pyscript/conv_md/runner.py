@@ -33,7 +33,7 @@ def apply_transformations(content: str, mode: str = "default") -> str:
 
     Args:
         content: 변환할 원본 텍스트.
-        mode: 변환 모드 ('mode1', 'mode2', 'default' 등).
+        mode: 변환 모드.
 
     Returns:
         str: 변환된 텍스트.
@@ -78,7 +78,7 @@ def conv_md(paths: list[str], mode: str = "default"):
 
     Args:
         paths: 변환할 마크다운 파일 경로 목록.
-        mode: 변환 모드 ('mode1', 'mode2', 'default' 등).
+        mode: 변환 모드.
     """
     if not paths:
         return
