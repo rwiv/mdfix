@@ -70,7 +70,7 @@ def add_blank_line_after_headers(content: str) -> str:
     Returns:
         str: 헤더 다음에 빈 줄이 추가된 텍스트.
     """
-    return re.sub(r'^(#{1,6}\s+.+)\n([^\n])', r'\1\n\n\2', content, flags=re.MULTILINE)
+    return re.sub(r'^(#{1,6}\s+.+)\n(?=[^\n])', r'\1\n\n', content, flags=re.MULTILINE)
 
 
 def normalize_header_levels(content: str) -> str:
@@ -164,11 +164,56 @@ def get_paths():
     return sys.argv[1:]
 
 
-def conv_md(paths: list[str]):
+def apply_transformations(content: str, mode: str = 'default') -> str:
+    """mode에 따라 다른 변환 전략을 적용합니다.
+
+    Args:
+        content: 변환할 원본 텍스트.
+        mode: 변환 모드 ('mode1', 'mode2', 'default' 등).
+
+    Returns:
+        str: 변환된 텍스트.
+    """
+    # mode별 변환 함수 목록 정의
+    transformations = {
+        'mode1': [
+            remove_numbered_lines,
+            remove_numbered_brackets,
+            convert_asterisk_to_dash,
+            reduce_numbered_list_spaces,
+        ],
+        'mode2': [
+            add_blank_line_after_headers,
+            normalize_header_levels,
+            convert_latex_brackets_to_double_dollar,
+            convert_latex_parentheses_to_dollar,
+        ],
+        'default': [
+            remove_numbered_lines,
+            remove_numbered_brackets,
+            convert_asterisk_to_dash,
+            reduce_numbered_list_spaces,
+            add_blank_line_after_headers,
+            normalize_header_levels,
+            convert_latex_brackets_to_double_dollar,
+            convert_latex_parentheses_to_dollar,
+        ],
+    }
+
+    # 해당 mode의 변환 함수들을 순차적으로 적용
+    funcs = transformations.get(mode, transformations['default'])
+    for func in funcs:
+        content = func(content)
+
+    return content
+
+
+def conv_md(paths: list[str], mode: str = 'default'):
     """마크다운 파일들을 변환하여 _out 접미사를 가진 새 파일로 저장합니다.
 
     Args:
         paths: 변환할 마크다운 파일 경로 목록.
+        mode: 변환 모드 ('mode1', 'mode2', 'default' 등).
     """
     if not paths:
         return
@@ -178,15 +223,8 @@ def conv_md(paths: list[str]):
         with open(source_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # 변환 작업
-        content = remove_numbered_lines(content)
-        content = remove_numbered_brackets(content)
-        content = convert_asterisk_to_dash(content)
-        content = reduce_numbered_list_spaces(content)
-        content = add_blank_line_after_headers(content)
-        content = normalize_header_levels(content)
-        content = convert_latex_brackets_to_double_dollar(content)
-        content = convert_latex_parentheses_to_dollar(content)
+        # mode에 따른 변환 작업
+        content = apply_transformations(content, mode)
 
         # 출력 파일 경로 생성 (원본과 같은 디렉터리에 _out 붙임)
         dir_name = os.path.dirname(source_path)
