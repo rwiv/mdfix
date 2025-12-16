@@ -2,10 +2,7 @@ import sys
 import os
 from unittest.mock import patch
 
-from mdfix.runner import (
-    get_argv_paths,
-    conv_md,
-)
+from mdfix.runner import get_argv_paths, normalize_md
 
 
 class TestGetPaths:
@@ -38,7 +35,7 @@ class TestGetPaths:
 class TestConvMd:
     def test_empty_paths_list(self, tmp_path):
         """빈 경로 리스트는 아무것도 하지 않음"""
-        conv_md([])
+        normalize_md([])
         # No files should be created
         assert len(list(tmp_path.glob("*"))) == 0
 
@@ -47,7 +44,7 @@ class TestConvMd:
         input_file = tmp_path / "test.md"
         input_file.write_text("# Header\nContent", encoding="utf-8")
 
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = tmp_path / "test_out.md"
         assert output_file.exists()
@@ -62,7 +59,7 @@ class TestConvMd:
         file1.write_text("# File 1", encoding="utf-8")
         file2.write_text("# File 2", encoding="utf-8")
 
-        conv_md([str(file1), str(file2)])
+        normalize_md([str(file1), str(file2)])
 
         assert (tmp_path / "file1_out.md").exists()
         assert (tmp_path / "file2_out.md").exists()
@@ -72,7 +69,7 @@ class TestConvMd:
         input_file = tmp_path / "document.md"
         input_file.write_text("Content", encoding="utf-8")
 
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = tmp_path / "document_out.md"
         assert output_file.exists()
@@ -83,7 +80,7 @@ class TestConvMd:
         korean_text = "# 한글 헤더\n테스트 내용입니다."
         input_file.write_text(korean_text, encoding="utf-8")
 
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = tmp_path / "korean_out.md"
         content = output_file.read_text(encoding="utf-8")
@@ -102,7 +99,7 @@ class TestConvMd:
 Inline math \\(a + b\\) here"""
 
         input_file.write_text(input_content, encoding="utf-8")
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = tmp_path / "test_out.md"
         assert output_file.exists()
@@ -123,7 +120,7 @@ Inline math \\(a + b\\) here"""
         input_file = nested_dir / "file.md"
         input_file.write_text("# Content", encoding="utf-8")
 
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = nested_dir / "file_out.md"
         assert output_file.exists()
@@ -133,7 +130,7 @@ Inline math \\(a + b\\) here"""
         input_file = tmp_path / "noext"
         input_file.write_text("# Content", encoding="utf-8")
 
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = tmp_path / "noext_out"
         assert output_file.exists()
@@ -143,7 +140,7 @@ Inline math \\(a + b\\) here"""
         input_file = tmp_path / "file.name.with.dots.md"
         input_file.write_text("# Content", encoding="utf-8")
 
-        conv_md([str(input_file)])
+        normalize_md([str(input_file)])
 
         output_file = tmp_path / "file.name.with.dots_out.md"
         assert output_file.exists()
@@ -157,7 +154,7 @@ Inline math \\(a + b\\) here"""
         original_cwd = os.getcwd()
         try:
             os.chdir(tmp_path)
-            conv_md(["relative.md"])
+            normalize_md(["relative.md"])
             assert (tmp_path / "relative_out.md").exists()
         finally:
             os.chdir(original_cwd)

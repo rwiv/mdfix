@@ -1,17 +1,7 @@
 import sys
 import os
 
-from .trans import (
-    remove_numbered_lines,
-    remove_numbered_brackets,
-    add_blank_line_after_headers,
-    normalize_header_levels,
-    convert_latex_brackets_to_double_dollar,
-    convert_latex_parentheses_to_dollar,
-    remove_space_before_punctuation,
-    convert_asterisk_to_dash,
-    reduce_numbered_list_spaces,
-)
+from mdfix.normalizers import Normalizer, bullets, headers, latex, refs, spaces
 
 
 def get_argv_paths() -> list[str]:
@@ -28,7 +18,7 @@ def get_argv_paths() -> list[str]:
     return sys.argv[1:]
 
 
-def apply_transformations(content: str, mode: str = "default") -> str:
+def normalize(content: str, mode: str = "default") -> str:
     """mode에 따라 다른 변환 전략을 적용합니다.
 
     Args:
@@ -39,26 +29,21 @@ def apply_transformations(content: str, mode: str = "default") -> str:
         str: 변환된 텍스트.
     """
     # mode별 변환 함수 목록 정의
-    transformations = {
-        "remove_refs": [
-            remove_numbered_lines,
-            remove_numbered_brackets,
-            add_blank_line_after_headers,
-            normalize_header_levels,
-            convert_latex_brackets_to_double_dollar,
-            convert_latex_parentheses_to_dollar,
-            remove_space_before_punctuation,
-        ],
+    norms: dict[str, list[Normalizer]] = {
         "remove_refs_gemini": [
-            remove_numbered_lines,
-            remove_numbered_brackets,
-            add_blank_line_after_headers,
-            normalize_header_levels,
-            convert_latex_brackets_to_double_dollar,
-            convert_latex_parentheses_to_dollar,
-            remove_space_before_punctuation,
-            convert_asterisk_to_dash,
-            reduce_numbered_list_spaces,
+            refs.ReferenceLineRemover(),  # refs.ReferenceMarkerRemover 보다 먼저 시행 필요
+            refs.ReferenceMarkerRemover(),
+            latex.LatexBracketNormalizer(),
+            latex.LatexParenthesisNormalizer(),
+            spaces.PunctuationSpaceRemover(),
+            spaces.TabCharacterNormalizer(),  # bullets.BulletIndentNormalizer 보다 먼저 시행 필요
+            headers.HeaderEmphasisRemover(),
+            headers.HeaderLevelNormalizer(),
+            headers.HeaderLineBreakAdder(),
+            headers.HeaderNumberMarkerConverter(delimiter=")"),
+            bullets.BulletIndentNormalizer(),
+            bullets.AsteriskNormalizer(),
+            bullets.OrderedListSpacesReducer(),
         ],
     }
 
@@ -66,14 +51,14 @@ def apply_transformations(content: str, mode: str = "default") -> str:
         mode = "remove_refs_gemini"
 
     # 해당 mode의 변환 함수들을 순차적으로 적용
-    funcs = transformations[mode]
+    funcs = norms[mode]
     for func in funcs:
         content = func(content)
 
     return content
 
 
-def conv_md(paths: list[str], mode: str = "default"):
+def normalize_md(paths: list[str], mode: str = "default"):
     """마크다운 파일들을 변환하여 _out 접미사를 가진 새 파일로 저장합니다.
 
     Args:
@@ -89,7 +74,7 @@ def conv_md(paths: list[str], mode: str = "default"):
             content = f.read()
 
         # mode에 따른 변환 작업
-        content = apply_transformations(content, mode)
+        content = normalize(content, mode)
 
         # 출력 파일 경로 생성 (원본과 같은 디렉터리에 _out 붙임)
         dir_name = os.path.dirname(source_path)
