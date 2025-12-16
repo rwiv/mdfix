@@ -17,6 +17,6 @@ class Normalizer(ABC):
         """
         pass
 
-    def __call__(self, content: str) -> str:
+    def __call__(self, text: str) -> str:
         """Normalizer를 호출 가능하게 만듭니다."""
-        return self.normalize(content)
+        return self.normalize(text)

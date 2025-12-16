@@ -90,28 +90,37 @@ class TestConvMd:
     def test_full_transformation_pipeline(self, tmp_path):
         """모든 패턴으로 완전한 변환"""
         input_file = tmp_path / "test.md"
-        input_content = """# Header [1]
+        input_content = """
+# Header [1]
 [1] Remove this line
 *   List item
-1.  Numbered
+1)  Numbered
+  - hello
 ### Deep header
 \\[ x^2 + y^2 = z^2 \\]
-Inline math \\(a + b\\) here"""
+Inline math \\(a + b\\) here
+"""
 
         input_file.write_text(input_content, encoding="utf-8")
-        normalize_md([str(input_file)])
+        normalize_md(paths=[str(input_file)], mode="default")
 
         output_file = tmp_path / "test_out.md"
         assert output_file.exists()
 
         output_content = output_file.read_text(encoding="utf-8")
-        # Verify all transformations
-        assert "[1]" not in output_content  # Brackets removed
-        assert "- List item" in output_content  # Asterisk converted
-        assert "1. Numbered" in output_content  # Spaces reduced
-        assert "## Deep header" in output_content  # Level normalized
-        assert "$$x^2 + y^2 = z^2$$" in output_content  # LaTeX display converted
-        assert "$a + b$" in output_content  # LaTeX inline converted
+        expected_output_content = """
+# Header
+
+- List item
+1. Numbered
+    - hello
+### Deep header
+
+$$x^2 + y^2 = z^2$$
+Inline math $a + b$ here
+"""
+        # Verify all normalizations
+        assert output_content == expected_output_content
 
     def test_nested_directory(self, tmp_path):
         """중첩 디렉토리의 파일 처리"""

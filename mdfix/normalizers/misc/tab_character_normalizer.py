@@ -1,4 +1,4 @@
-from mdfix.normalizers.normalizer import Normalizer
+from ..normalizer import Normalizer
 
 
 class TabCharacterNormalizer(Normalizer):

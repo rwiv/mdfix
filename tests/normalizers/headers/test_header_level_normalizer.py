@@ -8,6 +8,7 @@ from mdfix.normalizers.headers import HeaderLevelNormalizer
 @pytest.mark.parametrize(
     "input_text,expected",
     [
+        # fmt: off
         pytest.param("", "", id="empty_string"),  # 빈_문자열
         pytest.param("No headers", "No headers", id="no_headers"),  # 헤더_없음
         pytest.param("# H1\n## H2", "# H1\n## H2", id="min_level_1_no_change_a"),  # 최소레벨1_변경없음_a
@@ -18,7 +19,9 @@ from mdfix.normalizers.headers import HeaderLevelNormalizer
         pytest.param("## H2\n#### H4", "## H2\n#### H4", id="min_level_2_no_change"),  # 최소레벨2_변경없음
         pytest.param(
             "### H3\n#### H4\n##### H5", "## H3\n### H4\n#### H5", id="all_levels_normalized"
-        ),  # 모든_레벨_정규화됨
+        ),
+        # 모든_레벨_정규화됨
+        # fmt: on
     ],
 )
 def test_normalize_header_levels_cases(input_text, expected):

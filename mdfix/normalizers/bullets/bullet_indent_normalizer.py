@@ -1,6 +1,7 @@
 import re
+import sys
 
-from mdfix.normalizers.normalizer import Normalizer
+from ..normalizer import Normalizer
 
 
 class BulletIndentNormalizer(Normalizer):
@@ -25,23 +26,28 @@ class BulletIndentNormalizer(Normalizer):
             return text
 
         # 모든 글머리의 indent 개수 추출
-        indents = [len(match.group(1)) for match in matches]
+        min_indent = sys.maxsize
+        for indent_len in [len(match.group(1)) for match in matches]:
+            if indent_len == 0:
+                continue
+            if indent_len < min_indent:
+                min_indent = indent_len
 
-        # 최소 indent 찾기
-        min_indent = min(indents)
+        if min_indent == sys.maxsize:
+            return text
 
         # 최소 indent가 2라면 2배로 변환
         if min_indent == 2:
-
-            def adjust_indent(match):
-                spaces = match.group(1)
-                new_spaces = " " * (len(spaces) * 2)
-                bullet = match.group(2)
-                return new_spaces + bullet
-
-            return bullet_pattern.sub(adjust_indent, text)
+            return bullet_pattern.sub(_adjust_indent, text)
 
         return text
+
+
+def _adjust_indent(match: re.Match[str]):
+    spaces = match.group(1)
+    new_spaces = " " * (len(spaces) * 2)
+    bullet = match.group(2)
+    return new_spaces + bullet
 
 
 def _convert_tabs_to_spaces(text: str) -> str:
