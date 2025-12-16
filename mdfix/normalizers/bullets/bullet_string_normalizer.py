@@ -6,11 +6,15 @@ from ..normalizer import Normalizer
 
 class BulletStringNormalizer(Normalizer):
     """
-    모든 종류의 리스트 형식의 공백을 정규화합니다.
+    모든 종류의 리스트 형식의 글머리를 정규화합니다.
 
-    `*`, `-`, `숫자.`, `숫자)` 등 다양한 글머리 형식 다음의 공백을 1개로 정규화합니다.
-    예: `* foo`, `- foo`, `1. foo`, `1) foo` 등
-    기존 들여쓰기는 유지됩니다.
+    글머리 형식과 공백을 다음과 같이 정규화합니다:
+    - `*`, `+` → `-`로 통일
+    - `1)` → `1.`로 통일
+    - 글머리 뒤의 공백을 1개로 정규화
+    - 기존 들여쓰기는 유지
+
+    예: `* foo` → `- foo`, `+ bar` → `- bar`, `1) baz` → `1. baz`
     """
 
     def normalize(self, text: str) -> str:
@@ -25,6 +29,7 @@ def _replace_bullet(match: re.Match[str]):
     bullet = match.group(2)
     # * → -
     bullet = bullet.replace("*", "-")
+    bullet = bullet.replace("+", "-")
     # ) → .
     bullet = bullet.replace(")", ".")
     return f"{indent}{bullet} "

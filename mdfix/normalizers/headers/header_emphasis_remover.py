@@ -5,7 +5,7 @@ from ..normalizer import Normalizer
 
 class HeaderEmphasisRemover(Normalizer):
     """
-    마크다운 헤더의 강조 표시를 제거합니다.
+    마크다운 헤더의 강조 표시를 재귀적으로 제거합니다.
 
     헤더 내의 **bold**, *italic*, _emphasis_ 같은 강조 표시를 제거합니다.
     (예: "## **hello**" -> "## hello", "### _world_" -> "### world")
