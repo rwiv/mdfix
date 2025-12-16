@@ -2,8 +2,8 @@ import sys
 import os
 from unittest.mock import patch
 
-from pyscript.conv_md.runner import (
-    get_paths,
+from mdfix.runner import (
+    get_argv_paths,
     conv_md,
 )
 
@@ -12,27 +12,27 @@ class TestGetPaths:
     def test_no_arguments(self):
         """인자가 없으면 빈 리스트 반환"""
         with patch.object(sys, "argv", ["script.py"]):
-            assert get_paths() == []
+            assert get_argv_paths() == []
 
     def test_single_path(self):
         """단일 경로 인자"""
         with patch.object(sys, "argv", ["script.py", "/path/to/file.md"]):
-            assert get_paths() == ["/path/to/file.md"]
+            assert get_argv_paths() == ["/path/to/file.md"]
 
     def test_multiple_paths(self):
         """다중 경로 인자"""
         with patch.object(sys, "argv", ["script.py", "file1.md", "file2.md", "file3.md"]):
-            assert get_paths() == ["file1.md", "file2.md", "file3.md"]
+            assert get_argv_paths() == ["file1.md", "file2.md", "file3.md"]
 
     def test_paths_with_spaces(self):
         """공백이 포함된 경로"""
         with patch.object(sys, "argv", ["script.py", "/path/with spaces/file.md"]):
-            assert get_paths() == ["/path/with spaces/file.md"]
+            assert get_argv_paths() == ["/path/with spaces/file.md"]
 
     def test_absolute_paths(self):
         """절대 경로"""
         with patch.object(sys, "argv", ["script.py", "C:\\Users\\test\\file.md"]):
-            assert get_paths() == ["C:\\Users\\test\\file.md"]
+            assert get_argv_paths() == ["C:\\Users\\test\\file.md"]
 
 
 class TestConvMd:

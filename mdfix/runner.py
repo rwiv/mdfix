@@ -14,7 +14,7 @@ from .trans import (
 )
 
 
-def get_paths() -> list[str]:
+def get_argv_paths() -> list[str]:
     """커맨드 라인 인자로부터 파일 경로 목록을 가져옵니다.
 
     Returns:

@@ -1,5 +1,5 @@
 {
-  "include": ["pyscript", "tests"],
+  "include": ["mdfix", "tests"],
   "exclude": ["**/node_modules", "**/__pycache__"],
   "ignore": [],
   "venvPath": ".",

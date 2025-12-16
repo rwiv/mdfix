@@ -1,3 +1,3 @@
 #/bin/sh
 
-pytest tests/ --cov=pyscript --cov-report=term-missing
+pytest tests/ --cov=mdfix --cov-report=term-missing

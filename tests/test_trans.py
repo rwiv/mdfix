@@ -1,7 +1,7 @@
 import pytest
 import re
 
-from pyscript.conv_md.trans import (
+from mdfix.trans import (
     remove_numbered_brackets,
     remove_numbered_lines,
     convert_asterisk_to_dash,
