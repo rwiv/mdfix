@@ -43,6 +43,7 @@ def normalize(content: str, mode: str = "default") -> str:
             headers.HeaderNumberMarkerConverter(delimiter=")"),
             bullets.BulletIndentNormalizer(),
             bullets.BulletStringNormalizer(),
+            bullets.BulletLineBreakAdder(),
             misc.LineEndSpacesRemover(),
         ],
     }

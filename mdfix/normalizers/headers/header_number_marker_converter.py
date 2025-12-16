@@ -4,7 +4,8 @@ from ..normalizer import Normalizer
 
 
 class HeaderNumberMarkerConverter(Normalizer):
-    """마크다운 헤더의 원형 숫자 기호를 일반 숫자로 변환합니다.
+    """
+    마크다운 헤더의 원형 숫자 기호를 일반 숫자로 변환합니다.
 
     헤더 내의 ①, ②, ③ 등의 원형 숫자를 일반 숫자로 변환합니다.
     (예: "## ① hello" -> "## 1) hello", "## ② world" -> "## 2. world")

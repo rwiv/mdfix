@@ -1,2 +1,3 @@
 from .bullet_indent_normalizer import BulletIndentNormalizer
+from .bullet_line_break_adder import BulletLineBreakAdder
 from .bullet_string_normalizer import BulletStringNormalizer

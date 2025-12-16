@@ -4,7 +4,8 @@ from ..normalizer import Normalizer
 
 
 class HeaderLevelNormalizer(Normalizer):
-    """문서의 헤더 레벨을 정규화합니다.
+    """
+    문서의 헤더 레벨을 정규화합니다.
 
     - 최소 레벨이 1, 2면 그대로 냅둔다.
     - 최소 레벨이 3 이상이면 최소 레벨이 2가 되도록 모든 헤더의 레벨을 전체적으로 낮춘다.

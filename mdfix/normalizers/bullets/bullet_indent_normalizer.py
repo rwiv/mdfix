@@ -1,11 +1,13 @@
 import re
 import sys
 
+from .bullet_regex import BULLET_PATTERN
 from ..normalizer import Normalizer
 
 
 class BulletIndentNormalizer(Normalizer):
-    """마크다운 글머리의 indent를 정규화합니다.
+    """
+    마크다운 글머리의 indent를 정규화합니다.
 
     모든 글머리(`-`, `*`, `1.` 등)의 최소 indent를 찾아서:
     - 최소 indent가 2라면 모든 글머리의 indent를 2배로 변환 (2 -> 4, 4 -> 8)
@@ -17,7 +19,7 @@ class BulletIndentNormalizer(Normalizer):
         text = _convert_tabs_to_spaces(text)
 
         # 글머리 패턴: 행 시작 + 공백 + (- 또는 * 또는 숫자.)
-        bullet_pattern = re.compile(r"^( *)([-*]|\d+\.)", re.MULTILINE)
+        bullet_pattern = re.compile(BULLET_PATTERN, re.MULTILINE)
 
         # 모든 글머리와 indent 찾기
         matches = list(bullet_pattern.finditer(text))
@@ -47,7 +49,8 @@ def _adjust_indent(match: re.Match[str]):
     spaces = match.group(1)
     new_spaces = " " * (len(spaces) * 2)
     bullet = match.group(2)
-    return new_spaces + bullet
+    spaces = match.group(3)
+    return new_spaces + bullet + spaces
 
 
 def _convert_tabs_to_spaces(text: str) -> str:

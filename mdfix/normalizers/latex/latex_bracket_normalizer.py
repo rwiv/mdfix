@@ -4,7 +4,8 @@ from ..normalizer import Normalizer
 
 
 class LatexBracketNormalizer(Normalizer):
-    """LaTeX 수식 구분자를 마크다운 형식으로 변환합니다.
+    """
+    LaTeX 수식 구분자를 마크다운 형식으로 변환합니다.
 
     \\[와 \\]를 $$로 변환하며, 구분자 주변의 불필요한 공백이나 개행을 제거합니다.
     - \\[ 뒤의 공백이나 개행 제거
