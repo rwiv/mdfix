@@ -29,27 +29,34 @@ def normalize(content: str, mode: str = "default") -> str:
         str: 변환된 텍스트.
     """
     # mode별 변환 함수 목록 정의
+    base = [
+        latex.LatexBracketNormalizer(),
+        latex.LatexParenthesisNormalizer(),
+        misc.TabCharacterNormalizer(),  # bullets.BulletIndentNormalizer 보다 먼저 시행 필요
+        misc.HorizontalBarRemover(),
+        headers.HeaderEmphasisRemover(),
+        headers.HeaderLevelNormalizer(),
+        headers.HeaderLineBreakAdder(),
+        headers.HeaderNumberMarkerConverter(delimiter=")"),
+        bullets.BulletIndentNormalizer(),
+        bullets.BulletStringNormalizer(),
+        bullets.BulletLineBreakAdder(),
+        misc.LineEndSpacesRemover(),
+    ]
     norms: dict[str, list[Normalizer]] = {
-        "remove_refs_gemini": [
+        "normalize_refs": [
+            refs.ReferenceMarkerNormalizer(),
+            *base,
+        ],
+        "remove_refs": [
             refs.ReferenceLineRemover(),  # refs.ReferenceMarkerRemover 보다 먼저 시행 필요
             refs.ReferenceMarkerRemover(),
-            latex.LatexBracketNormalizer(),
-            latex.LatexParenthesisNormalizer(),
-            misc.TabCharacterNormalizer(),  # bullets.BulletIndentNormalizer 보다 먼저 시행 필요
-            misc.HorizontalBarRemover(),
-            headers.HeaderEmphasisRemover(),
-            headers.HeaderLevelNormalizer(),
-            headers.HeaderLineBreakAdder(),
-            headers.HeaderNumberMarkerConverter(delimiter=")"),
-            bullets.BulletIndentNormalizer(),
-            bullets.BulletStringNormalizer(),
-            bullets.BulletLineBreakAdder(),
-            misc.LineEndSpacesRemover(),
+            *base,
         ],
     }
 
     if mode == "default":
-        mode = "remove_refs_gemini"
+        mode = "remove_refs"
 
     # 해당 mode의 변환 함수들을 순차적으로 적용
     funcs = norms[mode]
