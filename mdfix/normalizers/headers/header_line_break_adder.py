@@ -11,4 +11,4 @@ class HeaderLineBreakAdder(Normalizer):
     """
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^(#{1,6}\s+.+)\n(?=[^\n])", r"\1\n\n", text, flags=re.MULTILINE)
+        return re.sub(r"^(#{1,6} +.+)\n(?=[^\n])", r"\1\n\n", text, flags=re.MULTILINE)

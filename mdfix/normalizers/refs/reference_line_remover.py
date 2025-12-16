@@ -10,4 +10,4 @@ class ReferenceLineRemover(Normalizer):
     """
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^\[\d+\]\s*.*\n?", "", text, flags=re.MULTILINE)
+        return re.sub(r"^\[\d+\] *.*\n?", "", text, flags=re.MULTILINE)

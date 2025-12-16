@@ -29,7 +29,7 @@ class HeaderNumberMarkerConverter(Normalizer):
         self.delimiter = delimiter
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^(#{1,6})\s+(.+)$", self.__convert_circled, text, flags=re.MULTILINE)
+        return re.sub(r"^(#{1,6}) +(.+)$", self.__convert_circled, text, flags=re.MULTILINE)
 
     def __convert_circled(self, match: re.Match[str]):
         header_marker = match.group(1)  # #, ##, ### 등

@@ -12,7 +12,7 @@ class HeaderLevelNormalizer(Normalizer):
 
     def normalize(self, text: str) -> str:
         # 모든 헤더 찾기
-        header_pattern = re.compile(r"^(#{1,6})\s+", re.MULTILINE)
+        header_pattern = re.compile(r"^(#{1,6}) +", re.MULTILINE)
         headers = header_pattern.findall(text)
 
         if not headers:

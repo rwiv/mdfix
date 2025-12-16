@@ -11,12 +11,22 @@ class HeaderEmphasisRemover(Normalizer):
     """
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^(#{1,6})\s+(.+)$", _remove_emphasis, text, flags=re.MULTILINE)
+        return re.sub(r"^(#{1,6}) +(.+)$", _remove_emphasis, text, flags=re.MULTILINE)
 
 
 def _remove_emphasis(match: re.Match[str]):
     header_marker = match.group(1)  # #, ##, ### 등
     header_text = match.group(2)  # 헤더 텍스트
-    # 강조 표시 제거: *, _ 문자 제거
-    cleaned_text = re.sub(r"[*_]+", "", header_text)
-    return header_marker + " " + cleaned_text
+    # 재귀적으로 emphasis 패턴 제거
+    prev = None
+    while prev != header_text:
+        prev = header_text
+        # **bold** 제거
+        header_text = re.sub(r"\*\*(.+?)\*\*", r"\1", header_text)
+        # __bold__ 제거
+        header_text = re.sub(r"__(.+?)__", r"\1", header_text)
+        # *italic* 제거
+        header_text = re.sub(r"\*(.+?)\*", r"\1", header_text)
+        # _italic_ 제거
+        header_text = re.sub(r"_(.+?)_", r"\1", header_text)
+    return header_marker + " " + header_text
