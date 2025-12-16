@@ -81,7 +81,6 @@ def convert_latex_parentheses_to_dollar(content: str) -> str:
     return content
 
 
-# TODO: add test
 def remove_space_before_punctuation(content: str) -> str:
     """구두점 앞의 불필요한 공백을 제거합니다.
 
