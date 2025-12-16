@@ -5,7 +5,7 @@ class HorizontalBarRemover(Normalizer):
     """
     Markdown의 horizontal bar를 제거합니다.
 
-    Horizontal bar(---, ***, 등)의 처리 규칙:
+    Horizontal bar(`---`, `***`, 등)의 처리 규칙:
     - 위와 아래가 모두 빈 줄인 경우: 위의 빈 줄과 horizontal bar를 모두 제거
     - 위 또는 아래 중 하나만 빈 줄인 경우: horizontal bar만 제거
     - 위와 아래가 모두 빈 줄이 아닌 경우: horizontal bar를 빈 줄로 대체
