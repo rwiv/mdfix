@@ -8,7 +8,7 @@
 
 ---
 
-## 2. 중첩 리스트 (Nested Lists)
+## 2. 리스트 (Lists)
 
 **숫자 리스트와 글머리 기호 리스트의 혼합** 형태입니다.
 
@@ -42,9 +42,7 @@
 
 특정 언어의 문법 강조(Syntax Highlighting)를 지원합니다.
 
-Python
-
-```
+```python
 def greeting(name):
     # 인사말 출력 함수
     print(f"Hello, {name}!")
@@ -54,11 +52,21 @@ greeting("Markdown")
 
 ---
 
-## 5. 인용문 및 수학 공식 (Quotes & LaTeX)
+## 5. 인용문 (Quotes)
 
 > "마크다운은 웹 작성자를 위해 만들어진 텍스트-HTML 변환 도구입니다."
 > 
 > — 존 그루버(John Gruber)
+
+---
+
+### 6. Links
+
+[구글 바로가기](https://www.google.com)
+
+---
+
+## 7. LaTeX
 
 복잡한 수식은 LaTeX를 사용하여 표현할 수 있습니다.
 
@@ -68,12 +76,8 @@ $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 
 ---
 
-## 6. 기타 요소 (Checklist & Links)
+## 8. Checklist & Links
 
 - [x] 마크다운 문법 정리하기
 - [x] 중첩 리스트 포함하기
 - [ ] 이미지 삽입 확인하기
-    
-
-[구글 바로가기](https://www.google.com/?authuser=3)
-
