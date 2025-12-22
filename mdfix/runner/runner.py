@@ -1,7 +1,7 @@
 import sys
 import os
 
-from mdfix.normalizers import Normalizer, bullets, headers, latex, refs, misc
+from mdfix.normalizers import Normalizer, bullets, headers, latex, refs, spaces, misc
 
 
 def get_argv_paths() -> list[str]:
@@ -32,7 +32,7 @@ def normalize(content: str, mode: str = "default") -> str:
     base = [
         latex.LatexBracketNormalizer(),
         latex.LatexParenthesisNormalizer(),
-        misc.TabCharacterNormalizer(),  # bullets.BulletIndentNormalizer 보다 먼저 시행 필요
+        spaces.TabCharacterNormalizer(),  # bullets.BulletIndentNormalizer 보다 먼저 시행 필요
         misc.HorizontalBarRemover(),
         headers.HeaderEmphasisRemover(),
         headers.HeaderLevelNormalizer(),
@@ -41,7 +41,9 @@ def normalize(content: str, mode: str = "default") -> str:
         bullets.BulletIndentNormalizer(),
         bullets.BulletStringNormalizer(),
         bullets.BulletLineBreakAdder(),
-        misc.LineEndSpacesRemover(),
+        spaces.PaddingLineRemover(),  # bullets.LineEndSpacesRemover 보다 먼저 시행 필요
+        spaces.LineEndSpacesRemover(),
+        spaces.MultipleNewlinesRemover(),
     ]
     norms: dict[str, list[Normalizer]] = {
         "normalize_refs": [

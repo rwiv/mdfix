@@ -12,6 +12,7 @@ Subpackages
    mdfix.normalizers.latex
    mdfix.normalizers.misc
    mdfix.normalizers.refs
+   mdfix.normalizers.spaces
 
 Submodules
 ----------
