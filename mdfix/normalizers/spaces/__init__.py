@@ -1,3 +1,4 @@
+from .empty_blockquote_remover import EmptyBlockquoteRemover
 from .line_end_spaces_remover import LineEndSpacesRemover
 from .multiple_newlines_remover import MultipleNewlinesRemover
 from .padding_line_remover import PaddingLineRemover

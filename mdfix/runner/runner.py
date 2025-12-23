@@ -42,6 +42,7 @@ def normalize(content: str, mode: str = "default") -> str:
         bullets.BulletStringNormalizer(),
         bullets.BulletLineBreakAdder(),
         spaces.PaddingLineRemover(),  # bullets.LineEndSpacesRemover 보다 먼저 시행 필요
+        spaces.EmptyBlockquoteRemover(),
         spaces.LineEndSpacesRemover(),
         spaces.MultipleNewlinesRemover(),
     ]

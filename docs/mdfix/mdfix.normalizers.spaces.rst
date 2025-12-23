@@ -4,6 +4,14 @@ mdfix.normalizers.spaces package
 Submodules
 ----------
 
+mdfix.normalizers.spaces.empty\_blockquote\_remover module
+----------------------------------------------------------
+
+.. automodule:: mdfix.normalizers.spaces.empty_blockquote_remover
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 mdfix.normalizers.spaces.line\_end\_spaces\_remover module
 ----------------------------------------------------------
 

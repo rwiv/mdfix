@@ -5,7 +5,7 @@ from ..normalizer import Normalizer
 
 class PaddingLineRemover(Normalizer):
     """
-    마크다운 텍스트에서 padding line을 제거합니다.
+    padding line을 제거합니다.
 
     padding line은 4개 이상의 공백 문자만으로 구성된 줄을 의미합니다.
     중간의 빈 줄(blank line)은 보존됩니다.
@@ -16,4 +16,4 @@ class PaddingLineRemover(Normalizer):
     """
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^>? {4,}\n", "", text, flags=re.MULTILINE)
+        return re.sub(r"^ {4,}\n", "", text, flags=re.MULTILINE)

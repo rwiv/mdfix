@@ -38,12 +38,6 @@ from mdfix.normalizers.spaces import PaddingLineRemover
         pytest.param("text\n\nmore", "text\n\nmore", id="blank_line_preserved"),  # 빈_줄_보존
         pytest.param("text\n    \n\nmore", "text\n\nmore", id="padding_and_blank_lines"),  # padding과_빈줄_혼합
 
-        # blockquote 관련 케이스
-        pytest.param(">    \ntext", "text", id="blockquote_with_padding"),  # blockquote_padding_줄
-        pytest.param(">    \n>    \ntext", "text", id="multiple_blockquote_padding"),  # 연속된_blockquote_padding
-        pytest.param("> text", "> text", id="blockquote_with_text"),  # blockquote_텍스트_(제거_안_됨)
-        pytest.param(">     \ntext", "text", id="blockquote_many_spaces"),  # blockquote_많은_공백
-
         # 엣지 케이스
         pytest.param("    text", "    text", id="spaces_with_text_no_newline"),  # 공백과_텍스트_(개행_없음)
         pytest.param("\ttext", "\ttext", id="tab_character"),  # 탭_문자
