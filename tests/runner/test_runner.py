@@ -91,12 +91,13 @@ class TestConvMd:
         """모든 패턴으로 완전한 변환"""
         input_file = tmp_path / "test.md"
         input_content = """
-# Header [1]
+## Header [1]
 [1] Remove this line
 *   List item
 1)  Numbered
   - hello
-### Deep header
+# Deep header 1
+### Deep header 3
 \\[ x^2 + y^2 = z^2 \\]
 Inline math \\(a + b\\) here
 """
@@ -109,12 +110,13 @@ Inline math \\(a + b\\) here
 
         output_content = output_file.read_text(encoding="utf-8")
         expected_output_content = """
-# Header
+## Header
 
 - List item
 1. Numbered
     - hello
-### Deep header
+# Deep header 1
+### Deep header 3
 
 $$x^2 + y^2 = z^2$$
 Inline math $a + b$ here

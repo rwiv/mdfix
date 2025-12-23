@@ -12,7 +12,7 @@ class HeaderEmphasisRemover(Normalizer):
     """
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^(#{1,6}) +(.+)$", _remove_emphasis, text, flags=re.MULTILINE)
+        return re.sub(r"^(#{2,6}) +(.+)$", _remove_emphasis, text, flags=re.MULTILINE)
 
 
 def _remove_emphasis(match: re.Match[str]):

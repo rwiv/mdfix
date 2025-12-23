@@ -12,18 +12,20 @@ from mdfix.normalizers.headers import HeaderEmphasisRemover
         pytest.param("No headers here", "No headers here", id="no_headers"),  # 헤더_없음
 
         # 단일 헤더 강조 표시 제거
-        pytest.param("# **bold**", "# bold", id="h1_bold"),  # h1_bold
         pytest.param("## *italic*", "## italic", id="h2_italic"),  # h2_italic
         pytest.param("### _emphasis_", "### emphasis", id="h3_emphasis"),  # h3_emphasis
 
+        # H1 케이스
+        pytest.param("# **bold**", "# **bold**", id="h1_bold"),  # h1_bold
+
         # 혼합 강조 표시
-        pytest.param("# **bold** *italic*", "# bold italic", id="mixed_emphasis"),  # 혼합_강조
+        pytest.param("## **bold** *italic*", "## bold italic", id="mixed_emphasis"),  # 혼합_강조
         pytest.param("## ***bold_italic***", "## bold_italic", id="triple_emphasis"),  # triple_emphasis
 
         # 다중 헤더
         pytest.param(
-            "# **Header 1**\n## *Header 2*",
-            "# Header 1\n## Header 2",
+            "## **Header 2**\n### *Header 3*",
+            "## Header 2\n### Header 3",
             id="multiple_headers",
         ),  # 다중_헤더
 
@@ -32,7 +34,7 @@ from mdfix.normalizers.headers import HeaderEmphasisRemover
         pytest.param("## Text with **partial** bold", "## Text with partial bold", id="partial_emphasis"),  # 부분_강조
 
         # 엣지 케이스
-        pytest.param("# _**mixed**_", "# mixed", id="mixed_emphasis_marks"),  # 혼합_강조_마크
+        pytest.param("## _**mixed**_", "## mixed", id="mixed_emphasis_marks"),  # 혼합_강조_마크
         pytest.param("#### **___all___**", "#### all", id="complex_nested_emphasis"),  # 복잡한_중첩_강조
 
         # 일반 텍스트는 변경 없음

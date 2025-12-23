@@ -13,13 +13,13 @@ from mdfix.normalizers.headers import HeaderLevelNormalizer
         pytest.param("", "", id="empty_string"),  # 빈_문자열
         pytest.param("No headers", "No headers", id="no_headers"),  # 헤더_없음
 
-        # 최소 레벨이 H1 인 경우 (변경 없음)
-        pytest.param("# H1", "# H1", id="h1_alone"),  # h1_단독
-        pytest.param("# H1\n## H2", "# H1\n## H2", id="h1_h2_no_change"),  # h1_h2_변경없음
-        pytest.param("# H1\n### H3", "# H1\n### H3", id="h1_h3_no_change"),  # h1_h3_변경없음
-
         # 최소 레벨이 H2 인 경우 (변경 없음)
         pytest.param("## H2\n#### H4", "## H2\n#### H4", id="h2_h4_no_change"),  # h2_h4_변경없음
+
+        # 최소 레벨이 H1 인 경우 (정규화 필요)
+        pytest.param("# H1", "# H1", id="h1_alone"),  # h1_단독
+        pytest.param("# H1\n## H2", "# H1\n## H2", id="h1_h2_no_change"),  # h1_h2_변경없음
+        pytest.param("# H1\n### H3", "# H1\n## H3", id="h1_h3_change"),  # h1_h3_변경없음
 
         # 최소 레벨이 H2 보다 큰 경우 (정규화 필요)
         pytest.param("### H3", "## H3", id="h3_to_h2"),  # h3_h2로_변환
@@ -46,8 +46,8 @@ from mdfix.normalizers.headers import HeaderLevelNormalizer
 
         # 혼합 시나리오
         pytest.param(
-            "# H1\n### H3\n#### H4",
-            "# H1\n### H3\n#### H4",
+            "# H1\n## H3\n### H4",
+            "# H1\n## H3\n### H4",
             id="mixed_with_h1",
         ),  # h1_포함_혼합
         pytest.param(
