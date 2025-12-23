@@ -28,7 +28,7 @@
 
 ## Testing Workflow
 
-### Step 1: Test Plan
+### 1. Test Plan (Optional)
 
 - **File Path**: `specs/TESTPLAN.md`
 - **Overwrite Rule**: 새로운 기능을 테스트할 때는 기존 내용을 무시하고 덮어쓴다(Overwrite). 기존 기능을 수정할 때는 부분 업데이트한다.
@@ -44,9 +44,7 @@
 3. **Dependencies**: 의존성 목록 및 Test Double(Mock/Stub) 사용 여부.
 4. **Tools**: 사용할 라이브러리/API (예: `@pytest.mark.parametrize`)와 선정 이유.
 
-### Step 2: Test Code Implementation
-
-`specs/TESTPLAN.md`을 기반으로 테스트 코드를 작성한다.
+### 2. Test Code Implementation
 
 - **Description**: 각 테스트 케이스마다 의도를 간단히 설명하는 한글 주석을 포함한다.
 - **Reference**: `tests/normalizers/spaces/test_multiple_newlines_remover.py` 스타일을 참고한다.

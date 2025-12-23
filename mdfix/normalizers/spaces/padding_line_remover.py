@@ -16,4 +16,4 @@ class PaddingLineRemover(Normalizer):
     """
 
     def normalize(self, text: str) -> str:
-        return re.sub(r"^( {4,}\n)+", "", text, flags=re.MULTILINE)
+        return re.sub(r"^>? {4,}\n", "", text, flags=re.MULTILINE)
