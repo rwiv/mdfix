@@ -27,7 +27,7 @@ def _remove_emphasis(match: re.Match[str]):
         # __bold__ 제거
         header_text = re.sub(r"__(.+?)__", r"\1", header_text)
         # *italic* 제거
-        header_text = re.sub(r"\*(.+?)\*", r"\1", header_text)
+        # header_text = re.sub(r"\*(.+?)\*", r"\1", header_text)
         # _italic_ 제거
-        header_text = re.sub(r"_(.+?)_", r"\1", header_text)
+        # header_text = re.sub(r"_(.+?)_", r"\1", header_text)
     return header_marker + " " + header_text
