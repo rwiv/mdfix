@@ -38,6 +38,23 @@ from mdfix.normalizers.spaces import PaddingLineRemover
         pytest.param("text\n\nmore", "text\n\nmore", id="blank_line_preserved"),  # 빈_줄_보존
         pytest.param("text\n    \n\nmore", "text\n\nmore", id="padding_and_blank_lines"),  # padding과_빈줄_혼합
 
+        # 코드 블록 케이스 (feat_plan.md)
+        pytest.param(
+            "```\n    \ncode\n```",
+            "```\n    \ncode\n```",
+            id="padding_in_code_block_preserved"
+        ),  # 코드_블록_내부_padding_보존
+        pytest.param(
+            "```\ncode\n```\n    \ntext",
+            "```\ncode\n```\ntext",
+            id="padding_outside_code_block_removed"
+        ),  # 코드_블록_외부_padding_제거
+        pytest.param(
+            "    \n```\n    \ncode\n```\n    \n",
+            "```\n    \ncode\n```\n",
+            id="mixed_padding_and_code_block"
+        ),  # 혼합_케이스
+
         # 엣지 케이스
         pytest.param("    text", "    text", id="spaces_with_text_no_newline"),  # 공백과_텍스트_(개행_없음)
         pytest.param("\ttext", "\ttext", id="tab_character"),  # 탭_문자

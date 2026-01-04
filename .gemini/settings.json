@@ -1,0 +1,17 @@
+{
+  "tools": {
+    "allowed": [
+      "cat",
+      "cd",
+      "ls",
+      "pwd",
+      "mkdir",
+
+      "git log",
+      "git diff",
+
+      "uv run pyright",
+      "uv run pytest"
+    ]
+  }
+}
