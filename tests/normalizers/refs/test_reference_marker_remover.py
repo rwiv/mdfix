@@ -29,6 +29,23 @@ from mdfix.normalizers.refs import ReferenceMarkerRemover
         # 비숫자 괄호는 제거 안 함
         pytest.param("[abc] not removed", "[abc] not removed", id="not_numeric"),  # 숫자_아님
         pytest.param("Mixed [1] [abc]", "Mixed[abc]", id="mixed_brackets"),  # 혼합_괄호
+
+        # 코드 블록 보호
+        pytest.param(
+            "```python\narr = [1]\n```",
+            "```python\narr = [1]\n```",
+            id="code_block_backticks",
+        ),
+        pytest.param(
+            "~~~\ndata[1]\n~~~",
+            "~~~\ndata[1]\n~~~",
+            id="code_block_tildes",
+        ),
+        pytest.param(
+            "Text [1] remove.\n```\nkeep[1]\n```\nText [2] remove.",
+            "Textremove.\n```\nkeep[1]\n```\nTextremove.",
+            id="mixed_content",
+        ),
     ],
     # fmt: on
 )
