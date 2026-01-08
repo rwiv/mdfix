@@ -51,7 +51,7 @@
 
 ### `Normalizer` Implementation
 
-[Normalizer](mdfix/normalizers/normalizer.py) 구현 시 다음 규칙을 따른다:
+[Normalizer](mdfix/normalizer.py) 구현 시 다음 규칙을 따른다:
 - **Reference Path**: `mdfix/normalizers/headers/header_emphasis_remover.py`의 구조와 패턴을 참고하여 일관성을 유지한다.
 - **Implementation Path**: 구현체는 `mdfix/normalizers/` 내 적절한 위치에 배치한다.
 - **Testing Path**: 관련 테스트는 `tests/normalizers/` 내부에 작성한다.

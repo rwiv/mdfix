@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.latex import LatexBracketNormalizer
+from mdfix.latex import LatexBracketNormalizer
 
 
 @pytest.mark.parametrize(

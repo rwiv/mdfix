@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.spaces import EmptyBlockquoteRemover
+from mdfix.spaces import EmptyBlockquoteRemover
 
 
 @pytest.mark.parametrize(

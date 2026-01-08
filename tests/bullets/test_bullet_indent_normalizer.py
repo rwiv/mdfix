@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.bullets import BulletIndentNormalizer
+from mdfix.bullets import BulletIndentNormalizer
 
 
 @pytest.mark.parametrize(

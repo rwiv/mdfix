@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.headers import HeaderNumberMarkerConverter
+from mdfix.headers import HeaderNumberMarkerConverter
 
 
 @pytest.mark.parametrize(

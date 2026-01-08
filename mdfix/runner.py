@@ -1,7 +1,8 @@
 import sys
 import os
 
-from mdfix.normalizers import Normalizer, bullets, headers, latex, refs, spaces, misc
+from . import misc, spaces, bullets, refs, latex, headers
+from .normalizer import Normalizer
 
 
 def get_argv_paths() -> list[str]:

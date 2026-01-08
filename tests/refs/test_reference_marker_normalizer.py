@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.refs import ReferenceMarkerNormalizer
+from mdfix.refs import ReferenceMarkerNormalizer
 
 
 @pytest.mark.parametrize(

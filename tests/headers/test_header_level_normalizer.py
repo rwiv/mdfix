@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from mdfix.normalizers.headers import HeaderLevelNormalizer
+from mdfix.headers import HeaderLevelNormalizer
 
 
 @pytest.mark.parametrize(

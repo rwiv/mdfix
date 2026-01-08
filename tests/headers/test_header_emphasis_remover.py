@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.headers import HeaderEmphasisRemover
+from mdfix.headers import HeaderEmphasisRemover
 
 
 @pytest.mark.parametrize(

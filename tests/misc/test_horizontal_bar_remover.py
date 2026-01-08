@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.misc import HorizontalBarRemover
+from mdfix.misc import HorizontalBarRemover
 
 
 @pytest.mark.parametrize(

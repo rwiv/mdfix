@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.latex import LatexParenthesisNormalizer
+from mdfix.latex import LatexParenthesisNormalizer
 
 
 @pytest.mark.parametrize(

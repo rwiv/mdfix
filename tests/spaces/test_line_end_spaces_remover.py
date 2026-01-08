@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.spaces import LineEndSpacesRemover
+from mdfix.spaces import LineEndSpacesRemover
 
 
 @pytest.mark.parametrize(

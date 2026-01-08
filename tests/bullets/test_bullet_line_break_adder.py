@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.bullets import BulletLineBreakAdder
+from mdfix.bullets import BulletLineBreakAdder
 
 
 @pytest.mark.parametrize(

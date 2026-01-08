@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.refs import ReferenceLineRemover
+from mdfix.refs import ReferenceLineRemover
 
 
 @pytest.mark.parametrize(

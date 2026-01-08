@@ -1,6 +1,6 @@
 import pytest
 
-from mdfix.normalizers.headers import HeaderLineBreakAdder
+from mdfix.headers import HeaderLineBreakAdder
 
 
 @pytest.mark.parametrize(
