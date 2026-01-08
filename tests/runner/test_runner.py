@@ -91,8 +91,7 @@ class TestConvMd:
         """모든 패턴으로 완전한 변환"""
         input_file = tmp_path / "test.md"
         input_content = """
-## Header [1]
-[1] Remove this line
+## Header
 *   List item
 1)  Numbered
   - hello

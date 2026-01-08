@@ -47,6 +47,9 @@ def normalize(content: str, mode: str = "default") -> str:
         spaces.MultipleNewlinesRemover(),
     ]
     norms: dict[str, list[Normalizer]] = {
+        "default": [
+            *base,
+        ],
         "normalize_refs": [
             refs.ReferenceMarkerNormalizer(),
             *base,
@@ -57,9 +60,6 @@ def normalize(content: str, mode: str = "default") -> str:
             *base,
         ],
     }
-
-    if mode == "default":
-        mode = "remove_refs"
 
     # 해당 mode의 변환 함수들을 순차적으로 적용
     funcs = norms[mode]
