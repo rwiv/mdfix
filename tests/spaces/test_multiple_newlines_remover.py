@@ -3,9 +3,9 @@ import pytest
 from mdfix.spaces import MultipleNewlinesRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -32,7 +32,7 @@ from mdfix.spaces import MultipleNewlinesRemover
         pytest.param("hello \n\n\n world", "hello \n\n world", id="newline_with_spaces"),  # 개행과_공백_혼합
         pytest.param("hello\t\n\n\nworld", "hello\t\n\nworld", id="tab_with_newlines"),  # 탭과_개행_혼합
     ],
-    # fmt: on
 )
+# fmt: on
 def test_multiple_newlines_remover(input_text, expected):
     assert MultipleNewlinesRemover()(input_text) == expected

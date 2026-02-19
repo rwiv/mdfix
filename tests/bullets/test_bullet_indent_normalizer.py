@@ -3,9 +3,9 @@ import pytest
 from mdfix.bullets import BulletIndentNormalizer
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -55,7 +55,7 @@ from mdfix.bullets import BulletIndentNormalizer
             id="min_indent_zero",
         ),  # min_indent_0_중첩
     ],
-    # fmt: on
 )
+# fmt: on
 def test_bullet_indent_normalizer(input_text, expected):
     assert BulletIndentNormalizer()(input_text) == expected

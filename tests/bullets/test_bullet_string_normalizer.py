@@ -3,9 +3,9 @@ import pytest
 from mdfix.bullets import BulletStringNormalizer
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -54,7 +54,7 @@ from mdfix.bullets import BulletStringNormalizer
         pytest.param("Text - not list", "Text - not list", id="dash_not_at_line_start"),  # 대시_줄시작_아님
         pytest.param("Text 1. not list", "Text 1. not list", id="numbered_dot_not_at_line_start"),  # 번호점_줄시작_아님
     ],
-    # fmt: on
 )
+# fmt: on
 def test_bullet_string_normalizer(input_text, expected):
     assert BulletStringNormalizer()(input_text) == expected

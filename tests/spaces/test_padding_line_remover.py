@@ -3,9 +3,9 @@ import pytest
 from mdfix.spaces import PaddingLineRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -60,7 +60,7 @@ from mdfix.spaces import PaddingLineRemover
         pytest.param("\ttext", "\ttext", id="tab_character"),  # 탭_문자
         pytest.param("  \t  \ntext", "  \t  \ntext", id="mixed_spaces_and_tabs"),  # 공백과_탭_혼합
     ],
-    # fmt: on
 )
+# fmt: on
 def test_padding_line_remover(input_text, expected):
     assert PaddingLineRemover()(input_text) == expected

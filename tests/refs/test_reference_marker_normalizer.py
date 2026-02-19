@@ -3,9 +3,9 @@ import pytest
 from mdfix.refs import ReferenceMarkerNormalizer
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -93,7 +93,7 @@ from mdfix.refs import ReferenceMarkerNormalizer
             id="multi_digit_reference",
         ),  # 여러_자리_참고문헌
     ],
-    # fmt: on
 )
+# fmt: on
 def test_reference_marker_normalizer(input_text, expected):
     assert ReferenceMarkerNormalizer()(input_text) == expected

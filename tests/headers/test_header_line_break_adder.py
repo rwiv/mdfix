@@ -3,9 +3,9 @@ import pytest
 from mdfix.headers import HeaderLineBreakAdder
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -31,7 +31,7 @@ from mdfix.headers import HeaderLineBreakAdder
         # 끝에 헤더
         pytest.param("# End header", "# End header", id="header_at_end"),  # 끝에_헤더
     ],
-    # fmt: on
 )
+# fmt: on
 def test_header_line_break_adder(input_text, expected):
     assert HeaderLineBreakAdder()(input_text) == expected

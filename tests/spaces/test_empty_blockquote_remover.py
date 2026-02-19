@@ -3,9 +3,9 @@ import pytest
 from mdfix.spaces import EmptyBlockquoteRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -40,7 +40,7 @@ from mdfix.spaces import EmptyBlockquoteRemover
         pytest.param("> text\n", "> text\n", id="blockquote_with_space_and_text"),  # blockquote_공백_텍스트
         pytest.param(">\t\n", ">\t\n", id="blockquote_with_tab"),  # blockquote_뒤에_탭
     ],
-    # fmt: on
 )
+# fmt: on
 def test_empty_blockquote_remover(input_text: str, expected: str) -> None:
     assert EmptyBlockquoteRemover()(input_text) == expected

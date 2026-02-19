@@ -3,9 +3,9 @@ import pytest
 from mdfix.refs import ReferenceLineRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -30,7 +30,7 @@ from mdfix.refs import ReferenceLineRemover
         # 줄 시작이 아닌 경우
         pytest.param("Not [1] at start", "Not [1] at start", id="not_at_line_start"),  # 줄_시작_아님
     ],
-    # fmt: on
 )
+# fmt: on
 def test_reference_line_remover(input_text, expected):
     assert ReferenceLineRemover()(input_text) == expected

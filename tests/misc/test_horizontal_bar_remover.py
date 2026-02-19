@@ -3,9 +3,9 @@ import pytest
 from mdfix.misc import HorizontalBarRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -62,7 +62,7 @@ from mdfix.misc import HorizontalBarRemover
             id="complex_scenario",
         ),  # 복합_시나리오
     ],
-    # fmt: on
 )
+# fmt: on
 def test_horizontal_bar_remover(input_text, expected):
     assert HorizontalBarRemover()(input_text) == expected

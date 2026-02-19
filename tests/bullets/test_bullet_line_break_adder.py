@@ -3,9 +3,9 @@ import pytest
 from mdfix.bullets import BulletLineBreakAdder
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -47,7 +47,7 @@ from mdfix.bullets import BulletLineBreakAdder
         pytest.param("- Not a bullet at all", "- Not a bullet at all", id="dash_not_at_start"),  # 글머리_아님
         pytest.param("Text with - dash", "Text with - dash", id="dash_in_middle"),  # 중간_대시
     ],
-    # fmt: on
 )
+# fmt: on
 def test_bullet_line_break_adder(input_text, expected):
     assert BulletLineBreakAdder()(input_text) == expected

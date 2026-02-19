@@ -3,9 +3,9 @@ import pytest
 from mdfix.headers import HeaderEmphasisRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -40,7 +40,7 @@ from mdfix.headers import HeaderEmphasisRemover
         # 일반 텍스트는 변경 없음
         pytest.param("Text with **bold** here", "Text with **bold** here", id="non_header_text"),  # 헤더_아님_텍스트
     ],
-    # fmt: on
 )
+# fmt: on
 def test_header_emphasis_remover(input_text, expected):
     assert HeaderEmphasisRemover()(input_text) == expected

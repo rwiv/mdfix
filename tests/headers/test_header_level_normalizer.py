@@ -5,9 +5,9 @@ import pytest
 from mdfix.headers import HeaderLevelNormalizer
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -56,8 +56,8 @@ from mdfix.headers import HeaderLevelNormalizer
             id="preserve_relative_levels",
         ),  # 상대적_레벨_유지
     ],
-    # fmt: on
 )
+# fmt: on
 def test_header_level_normalizer(input_text, expected):
     result = HeaderLevelNormalizer()(input_text)
     assert result == expected

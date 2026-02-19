@@ -3,9 +3,9 @@ import pytest
 from mdfix.refs import ReferenceMarkerRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -47,7 +47,7 @@ from mdfix.refs import ReferenceMarkerRemover
             id="mixed_content",
         ),
     ],
-    # fmt: on
 )
+# fmt: on
 def test_reference_marker_remover(input_text, expected):
     assert ReferenceMarkerRemover()(input_text) == expected

@@ -3,9 +3,9 @@ import pytest
 from mdfix.spaces import LineEndSpacesRemover
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -29,7 +29,7 @@ from mdfix.spaces import LineEndSpacesRemover
         # 중간 공백은 유지
         pytest.param("  hello  world  ", "  hello  world", id="middle_spaces_preserved"),  # 중간_공백_유지
     ],
-    # fmt: on
 )
+# fmt: on
 def test_line_end_spaces_remover(input_text, expected):
     assert LineEndSpacesRemover()(input_text) == expected

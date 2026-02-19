@@ -3,9 +3,9 @@ import pytest
 from mdfix.headers import HeaderNumberMarkerConverter
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -42,21 +42,21 @@ from mdfix.headers import HeaderNumberMarkerConverter
         # 혼합 시나리오
         pytest.param("## ① first\n### Regular header", "## 1) first\n### Regular header", id="mixed_circled_and_normal"),  # 혼합
     ],
-    # fmt: on
 )
+# fmt: on
 def test_header_number_marker_converter(input_text, expected):
     assert HeaderNumberMarkerConverter()(input_text) == expected
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected,delimiter",
-    # fmt: off
     [
         # 커스텀 delimiter 테스트
         pytest.param("## ① one", "## 1. one", ".", id="dot_delimiter"),  # 점_구분자
         pytest.param("## ② two", "## 2: two", ":", id="colon_delimiter"),  # 콜론_구분자
     ],
-    # fmt: on
 )
+# fmt: on
 def test_header_number_marker_converter_with_delimiter(input_text, expected, delimiter):
     assert HeaderNumberMarkerConverter(delimiter=delimiter)(input_text) == expected

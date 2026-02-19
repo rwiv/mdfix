@@ -3,9 +3,9 @@ import pytest
 from mdfix.latex import LatexParenthesisNormalizer
 
 
+# fmt: off
 @pytest.mark.parametrize(
     "input_text,expected",
-    # fmt: off
     [
         # 기본 케이스
         pytest.param("", "", id="empty_string"),  # 빈_문자열
@@ -26,7 +26,7 @@ from mdfix.latex import LatexParenthesisNormalizer
         pytest.param("\\(\\(nested\\)\\)", "$$nested$$", id="nested_parens"),  # 중첩된_괄호
         pytest.param("Mix \\(inline\\) and (regular)", "Mix $inline$ and (regular)", id="mixed_parens"),  # 혼합_괄호
     ],
-    # fmt: on
 )
+# fmt: on
 def test_latex_parenthesis_normalizer(input_text, expected):
     assert LatexParenthesisNormalizer()(input_text) == expected
