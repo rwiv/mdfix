@@ -119,9 +119,9 @@
 다음처럼 구조적인 테스트 코드 블럭에는 `fmt: off`, `fmt: on`를 붙여라.
 
 ```python
+# fmt: off
 @pytest.mark.parametrize(
     "text, expected",
-    # fmt: off
     [
         ## 1. Basic Punctuation
         ("Hello world.", ["Hello world."]),
@@ -129,6 +129,6 @@
         ("Hello world. This is a test.", ["Hello world.", "This is a test."]),
         # ...
     ],
-    # fmt: on
 )
+# fmt: on
 ```
